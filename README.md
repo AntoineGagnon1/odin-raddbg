@@ -1,0 +1,1 @@
+To generate the lib file, run build.bat **from a VS22 command prompt**
