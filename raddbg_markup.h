@@ -214,20 +214,20 @@ raddbg_encode_utf16(wchar_t *str, unsigned __int32 codepoint)
 
 //- implementations
 
-static inline int
+int
 raddbg_is_attached__impl(void)
 {
   return !!raddbg_is_attached_byte_marker[0];
 }
 
-static inline int
+int
 raddbg_thread_id__impl(void)
 {
   DWORD result = GetCurrentThreadId();
   return result;
 }
 
-static inline void
+void
 raddbg_thread_name__impl(int id, char *fmt, ...)
 {
   // rjf: resolve variadic arguments
@@ -307,7 +307,7 @@ raddbg_thread_name__impl(int id, char *fmt, ...)
   }
 }
 
-static inline void
+void
 raddbg_thread_color__impl(int id, unsigned int hexcode)
 {
   if(raddbg_is_attached())
@@ -338,15 +338,15 @@ raddbg_thread_color__impl(int id, unsigned int hexcode)
   }
 }
 
-#define raddbg_break__impl() (__debugbreak())
+void raddbg_break__impl() { __debugbreak(); }
 
-static inline void
+void
 raddbg_watch__impl(char *fmt, ...)
 {
   // TODO(rjf)
 }
 
-static inline void
+void
 raddbg_log__impl(char *fmt, ...)
 {
   // rjf: resolve variadic arguments
@@ -362,7 +362,7 @@ raddbg_log__impl(char *fmt, ...)
   OutputDebugStringA(buffer);
 }
 
-static inline void
+void
 raddbg_add_or_remove_breakpoint__impl(void *ptr, int set, int size, int r, int w, int x)
 {
   if(raddbg_is_attached())
